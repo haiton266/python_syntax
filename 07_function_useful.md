@@ -13,11 +13,32 @@
   arr.sort(reverse=True)  # [9, 6, 5, 5, 2, 1]
   ```
 
+- **Sort and save order list**:
+
+  ```python
+  # Original list
+  original_list = [5, 3, 8, 1, 4]
+
+  # Create a list of tuples (index, value)
+
+  indexed_list = list(enumerate(original_list))
+
+  # Sort the list by the value
+
+  sorted_list = sorted(indexed_list, key=lambda x: x[1])
+
+  # Print the sorted list with original indices
+
+  print("Sorted with original indices:", sorted_list)
+  ```
+
 - **Sort without modifying the original list**:
 
   ```python
   sorted_arr = sorted(arr)  # Returns a sorted copy
   ```
+
+````
 
 - **Sort a list of tuples by a specific key**:
 
@@ -221,3 +242,4 @@
 
   subsets = generate_subsets([1, 2, 3])  # [[], [1], [2], [1, 2], [3], [1, 3], ...]
   ```
+````

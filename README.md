@@ -9,9 +9,10 @@
 - **Useful Functions**: A compilation of handy functions, detailed in section 7.
 - **Optimization Techniques**: Common techniques to achieve time complexity of O(n), with explanations and examples.
 
-```python
-# https://leetcode.com/problems/word-pattern/description/?envType=problem-list-v2&envId=hash-table
+Dictionary, zip:
+https://leetcode.com/problems/word-pattern/description/?envType=problem-list-v2&envId=hash-table
 
+```python
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
         pattern_to_s = {}
@@ -33,4 +34,38 @@ class Solution:
 
 # Example usage
 print(Solution().wordPattern("abba", "dog cat cat dog"))
+```
+
+Sort, save location: https://leetcode.com/problems/largest-number-at-least-twice-of-others/?envType=problem-list-v2&envId=sorting
+
+```python
+class Solution:
+    def dominantIndex(self, nums: List[int]) -> int:
+        indexed_list = list(enumerate(nums))
+        indexed_list = sorted(indexed_list, key=lambda x: x[1])
+        n = len(nums)
+        if indexed_list[n-1][1] >= indexed_list[n-2][1] * 2:
+            return indexed_list[n-1][0]
+        else:
+            return -1
+```
+
+Convert a string to a list of integers, initialize a list full of zeros, iterate with an id list.: https://leetcode.com/problems/maximum-score-after-splitting-a-string/?envType=problem-list-v2&envId=prefix-sum
+
+```python
+class Solution:
+    def maxScore(self, s: str) -> int:
+        nums = [int(char) for char in s] # Convert str to list int
+        n = len(nums)
+        sum = [0] * n
+        for id, num in enumerate(nums):
+            if id == 0:
+                sum[id] = num
+            else:
+                sum[id] = sum[id - 1] + num
+
+        result = 0
+        for loc in range(0, n-1):
+            result = max(result, loc - sum[loc] + 1 + sum[n-1] - sum[loc])
+        return result
 ```
