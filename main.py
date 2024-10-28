@@ -1,21 +1,33 @@
-class Solution:
-    def maxScore(self, s: str) -> int:
-        nums = [int(char) for char in s] # Convert str to list int
-        n = len(nums)
-        sum = [0] * n
-        for id, num in enumerate(nums):
-            if id == 0:
-                sum[id] = num 
-            else:
-                sum[id] = sum[id - 1] + num
-        
-        result = 0
-        for loc in range(0, n-1):
-            result = max(result, loc - sum[loc] + 1 + sum[n-1] - sum[loc])
-        return result
-    
+from typing import List
+from collections import defaultdict
 
-# TEst
-s = "00111"
+class Solution:
+    def dfs(self, graph, start, destination, visited=None):
+        if visited is None:
+            visited = set()
+        
+        if start == destination:
+            return True
+        
+        visited.add(start)
+
+        for neighbor in graph[start]:
+            if neighbor not in visited:
+                if self.dfs(graph, neighbor, destination, visited):
+                    return True
+        
+        return False
+
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        # Build graph from edges
+        graph = defaultdict(list)
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        # Use DFS to check if there's a path from source to destination
+        return self.dfs(graph, source, destination)
+
+# Test
 sol = Solution()
-print(sol.maxScore(s)) # 5
+print(sol.validPath(5, [[0,1],[0,2],[0,3],[0,4],[4,2]], 0, 2))  # Expected output: True

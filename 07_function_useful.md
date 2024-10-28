@@ -38,13 +38,11 @@
   sorted_arr = sorted(arr)  # Returns a sorted copy
   ```
 
-````
-
 - **Sort a list of tuples by a specific key**:
 
   ```python
-  data = [(1, 'b'), (2, 'a'), (3, 'c')]
-  sorted_data = sorted(data, key=lambda x: x[1])  # Sorts by second element
+    data = [(1, 'b'), (2, 'a'), (3, 'c')]
+    sorted_data = sorted(data, key=lambda x: x[1])  # Sorts by second element
   ```
 
 ### 2. **Mathematical Operations**
@@ -242,4 +240,7 @@
 
   subsets = generate_subsets([1, 2, 3])  # [[], [1], [2], [1, 2], [3], [1, 3], ...]
   ```
-````
+
+```
+
+```
