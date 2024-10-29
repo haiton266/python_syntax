@@ -1,33 +1,17 @@
-from typing import List
-from collections import defaultdict
-
 class Solution:
-    def dfs(self, graph, start, destination, visited=None):
-        if visited is None:
-            visited = set()
-        
-        if start == destination:
-            return True
-        
-        visited.add(start)
+    def findJudge(self, n: int, relation: List[List[int]]) -> int:
+        trust_count = [0] * (n + 1)
+        trusted_count = [0] * (n + 1)
 
-        for neighbor in graph[start]:
-            if neighbor not in visited:
-                if self.dfs(graph, neighbor, destination, visited):
-                    return True
-        
-        return False
+        for u, v in relation:
+            trust_count[u] += 1
+            trusted_count[v] += 1
 
-    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        # Build graph from edges
-        graph = defaultdict(list)
-        for u, v in edges:
-            graph[u].append(v)
-            graph[v].append(u)
-        
-        # Use DFS to check if there's a path from source to destination
-        return self.dfs(graph, source, destination)
+        for num in range(1, n + 1):
+            if trusted_count[num] == n - 1 and trust_count[num] == 0:
+                return num
+        return -1
 
-# Test
-sol = Solution()
-print(sol.validPath(5, [[0,1],[0,2],[0,3],[0,4],[4,2]], 0, 2))  # Expected output: True
+
+s = Solution()
+print(s.findJudge(2, [[1, 2]])) # 2
