@@ -1,5 +1,9 @@
 Continue learning at: https://fastapi.tiangolo.com/tutorial/bigger-applications/#path-operations-with-apirouter
 
+
+```bash
+fastapi dev main.py
+```
 ```
 ├── app
 │   ├── __init__.py
